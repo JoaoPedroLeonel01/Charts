@@ -1,0 +1,36 @@
+//
+//  RuleBar.swift
+//  ChartsEstudo
+//
+//  Created by Joao pedro Leonel on 14/10/25.
+//
+
+import Foundation
+import SwiftUI
+import Charts
+
+struct RuleBar: View {
+    var body: some View {
+        //Grafico de linha
+        Chart{
+            // linha de meta (pontilhada mostrando um lugar para atingir)
+            RuleMark(y:.value("Goal", 80000))
+                .foregroundStyle(Color.mint)
+                .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
+                .annotation(alignment: .leading){
+                    Text("Goal")
+                        .font(.caption)
+                        .foregroundColor(Color.secondary)
+                }
+            
+            
+            //printando o grafico de barro e declarando o eixo x e y
+            ForEach(ViewMonths) { viewMonth in
+                RuleMark(x: .value("Month", viewMonth.date, unit: .month))
+                    .foregroundStyle(Color.green)
+            }
+            
+        }
+        .frame(height: 180)
+    }
+}
